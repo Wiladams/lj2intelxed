@@ -15,7 +15,7 @@ import "lj2intelxed.xed-portability"
 import "lj2intelxed.xed-common-hdrs"
 import "lj2intelxed.xed-types"
 
-import "lj2intelxed.xed-operand-enum"
+import "lj2intelxed.obj.xed-operand-enum"
 
 import "lj2intelxed.xed-init"
 import "lj2intelxed.xed-decode"
