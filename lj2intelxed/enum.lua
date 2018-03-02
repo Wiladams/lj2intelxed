@@ -37,18 +37,32 @@ function enum.valueToString(self, aValue)
     return false;
 end
 
+local function dictLength(dict)
+    local len = 0;
+    for k,v in pairs(dict) do
+        len = len + 1;
+    end
 
-function enum.getCdef(self, enumname, prefix)
+    return len;
+end
+
+function enum.getCdef(self, enumname, prefix, inorder)
     enumname = enumname or ""
     prefix = prefix or ""
     local sb = StringBuilder()
     
     sb:append("typedef enum {")
-    
-    for k,v in pairs(self) do
-        local keyname = prefix..k
-        local cString = string.format("    %s = %d,", keyname, v);
-        sb:append(cString)
+    if not inorder then
+        for k,v in pairs(self) do
+            local keyname = prefix..k
+            local cString = string.format("    %s = %d,", keyname, v);
+            sb:append(cString)
+        end
+    else
+        -- Want to do them in numerical order
+        -- best way is to put in sorted table
+        local len = dictLength(self);
+        print("LENGTH: ", len)
     end
     sb:append(string.format("} %s;", enumname))
 
@@ -56,7 +70,6 @@ function enum.getCdef(self, enumname, prefix)
 end
 
 function enum.importCdef(self, enumname, prefix)
-    print(self:getCdef(enumname, prefix))
     ffi.cdef(self:getCdef(enumname, prefix))
 end
 
