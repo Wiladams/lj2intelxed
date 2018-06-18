@@ -7,8 +7,22 @@ setmetatable(enum, {
         return self:create(...)
     end,
 })
+
+--[[
+    Metatable for an enum
+    The primary benefit of this metatable is that 
+    it provides reverse lookups.
+]]
 local enum_mt = {
-    __index = enum;
+    __index = function(tbl, value)
+        for key, code in pairs(tbl) do
+            if code == value then 
+                return key;
+            end
+        end
+
+        return false;
+    end;
 }
 
 function enum.init(self, alist)
@@ -22,6 +36,12 @@ function enum.create(self, alist)
     return self:init(alist);
 end
 
+--[[
+    Class functions
+    
+    Invoke with
+    enum:stringToValue(aname)
+--]]
 function enum.stringToValue(self, aname)
     return  self[aname] or false;
 end

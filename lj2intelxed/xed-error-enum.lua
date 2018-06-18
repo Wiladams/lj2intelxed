@@ -1,8 +1,7 @@
-local ffi = require("ffi")
 
 local enum = require("lj2intelxed.enum")
 
-local error_enum = enum ({    
+local error_enum = enum {    
     NONE = 0; -- ffi.C.XED_ERROR_NONE;
     BUFFER_TOO_SHORT = 1; -- ffi.C.XED_ERROR_BUFFER_TOO_SHORT;
     GENERAL_ERROR = 2; -- ffi.C.XED_ERROR_GENERAL_ERROR;
@@ -23,9 +22,9 @@ local error_enum = enum ({
     INSTR_TOO_LONG = 17; -- ffi.C.XED_ERROR_INSTR_TOO_LONG;
     INVALID_MODE = 18; -- ffi.C.XED_ERROR_INVALID_MODE;
     LAST = 19;      -- ffi.C.XED_ERROR_LAST;
-})
+}
 
 
-error_enum:importCdef("xed_error_enum_t", "XED_ERROR_")
+enum:importCdef("xed_error_enum_t", "XED_ERROR_")
 
 return error_enum

@@ -64,6 +64,6 @@ local cpuid_bit_enum = enum {
   LAST = 61
 }
 
-cpuid_bit_enum:importCdef("xed_cpuid_bit_enum_t", "XED_CPUID_");
+--cpuid_bit_enum:importCdef("xed_cpuid_bit_enum_t", "XED_CPUID_");
 
 return cpuid_bit_enum
